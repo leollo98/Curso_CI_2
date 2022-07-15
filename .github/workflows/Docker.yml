@@ -22,3 +22,18 @@ jobs:
         username: leonardosartorello
     # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.PASSWORD_DOCKER_HUB }}
+        
+        
+    - name: Build and push Docker images
+  # You may pin to the exact commit or the version.
+  # uses: docker/build-push-action@e551b19e49efd4e98792db7592c17c09b89db8d8
+      uses: docker/build-push-action@v3.0.0
+      with:
+    # Build's context is the set of files located in the specified PATH or URL
+        context: .
+    # Path to the Dockerfile
+        file: ./Dockerfile
+    # Push is a shorthand for --output=type=registry
+        push: true
+    # List of tags
+        tags: leonardosartorello/go_ci:${{github.ref_name}}
